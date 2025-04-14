@@ -1,7 +1,7 @@
 import { WelcomePage } from "../components/welcomePage"
 import { NavBar } from "../components/navBar"
 import { Footer } from "../components/footer"
-import '../scss/home.css'
+import '../scss/out/home.css'
 
 export function Home() {
     return (

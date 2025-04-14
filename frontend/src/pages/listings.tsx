@@ -2,8 +2,8 @@ import { Footer } from "../components/footer"
 import { ListingList } from "../components/listingList"
 import { ListingSearch } from "../components/listingSearch"
 import { NavBar } from "../components/navBar"
-import '../scss/listingSearch.css'
-import '../scss/listings.css'
+import '../scss/out/listingSearch.css'
+import '../scss/out/listings.css'
 
 export function Listings()
 {
