@@ -1,0 +1,40 @@
+#welcomePage
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    color: black;
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-left: 10vh;
+    margin-right: 10vh;
+    margin-bottom: calc(46px + 2rem + 1rem);
+    border-radius: 0.5rem;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    img
+    {
+        border-radius: 0.5rem;
+        width: 40vh;
+        height: 30vh;
+    }
+
+    h1
+    {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        margin-left: 5vh;
+        margin-right: 5vh;
+    }
+
+    p
+    {
+        margin-left: 5vh;
+        margin-right: 5vh;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+}

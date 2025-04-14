@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gidole&display=swap');
+
+$green-color: darkgreen;
+$greendark-color: rgb(0, 80, 0);
+$white-color: white;
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+.gidole-regular 
+{
+    font-family: "Gidole", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body
+{
+    height: 100%;
+}
+
+h1, h2, h3, p
+{
+    font-family: "Gidole", sans-serif;
+}
+
+#navBar
+{
+    display: flex;
+    font-family: "Gidole", sans-serif;
+    list-style-type: none;
+    overflow: hidden;
+    background-color: $white-color;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    .link
+    {
+        color: black;
+        padding: 1rem 2rem;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s;
+
+        &:hover:not(#active)
+        {
+            background-color: #EEE;
+        }
+        &#active:hover
+        {
+            background-color: $greendark-color;
+        }
+    }
+
+    .navBarRight
+    {
+        margin-left: auto;
+    }
+
+    #active
+    {
+        background-color: $green-color;
+        color: $white-color;
+    }
+}
+
+footer
+{
+    font-family: "Gidole", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    background-color: $green-color;
+    padding: 0.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    .social-icons
+    {
+        list-style: none;
+        gap: 15px;
+
+        li
+        {
+            display: inline;
+        }
+        a
+        {
+            color: $white-color;
+            text-decoration: none;
+            font-size: 24px;
+            transition: color 0.3s;
+
+            &:hover
+            {
+                color: #AAA;
+            }
+        }
+    }
+}

@@ -1,0 +1,125 @@
+$green-color: green;
+$white-color: white;
+
+#listingSearch
+{
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-right: 10vh;
+    margin-left: 1rem;
+    padding: 1rem;
+    width: 20%;
+    height: fit-content;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    h3
+    {
+        text-align: left;
+    }
+
+    .residence
+    {
+        text-align: left;
+        padding: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        text-decoration: none;
+        background-color: $white-color;
+        border-radius: 0.5rem;
+        border-width: 1px;
+        border-color: $green-color;
+        transition: color 0.3s;
+
+        &:hover
+        {
+            background-color: #EEE;
+        }
+    }
+
+    .roomsDropdownSection
+    {
+        position: relative;
+        width: 100%;
+
+        .roomsButtonSection
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .roomsDropdown
+        {
+            text-align: left;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            background-color: $white-color;
+            border-radius: 0.5rem;
+            border-width: 1px;
+            border-color: $green-color;
+            width: 100%;
+            z-index: 2;
+            transition: color 0.3s;
+    
+            &.left
+            {
+                margin-right: 0.5rem;
+            }
+            &.right
+            {
+                margin-left: 0.5rem;
+            }
+    
+            &:hover
+            {
+                background-color: #EEE;
+            }
+        }
+
+        .dropdown-content 
+        {
+            position: absolute;
+            top: 100%;
+            background-color: $white-color;
+            border: 1px solid $green-color;
+            display: none;
+            flex-direction: column;
+            z-index: 10;
+            width: calc(50% - 8px - 0.5rem);
+
+            &.left 
+            {
+                left: 0;
+            }
+          
+            &.right 
+            {
+                right: 0;
+            }
+
+            &.show 
+            {
+                display: flex;
+            }
+        }
+
+        .rooms {
+            text-align: left;
+            padding: 0.5rem;
+            border: none;
+            background-color: $white-color;
+            width: 100%;
+            transition: background-color 0.3s;
+        
+            &:hover {
+              background-color: #eee;
+            }
+        }
+    }
+}

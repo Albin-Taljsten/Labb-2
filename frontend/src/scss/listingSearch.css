@@ -1,0 +1,95 @@
+#listingSearch {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-right: 10vh;
+  margin-left: 1rem;
+  padding: 1rem;
+  width: 20%;
+  height: -moz-fit-content;
+  height: fit-content;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#listingSearch h3 {
+  text-align: left;
+}
+#listingSearch .residence {
+  text-align: left;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: green;
+  transition: color 0.3s;
+}
+#listingSearch .residence:hover {
+  background-color: #EEE;
+}
+#listingSearch .roomsDropdownSection {
+  position: relative;
+  width: 100%;
+}
+#listingSearch .roomsDropdownSection .roomsButtonSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+#listingSearch .roomsDropdownSection .roomsDropdown {
+  text-align: left;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: green;
+  width: 100%;
+  z-index: 2;
+  transition: color 0.3s;
+}
+#listingSearch .roomsDropdownSection .roomsDropdown.left {
+  margin-right: 0.5rem;
+}
+#listingSearch .roomsDropdownSection .roomsDropdown.right {
+  margin-left: 0.5rem;
+}
+#listingSearch .roomsDropdownSection .roomsDropdown:hover {
+  background-color: #EEE;
+}
+#listingSearch .roomsDropdownSection .dropdown-content {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  border: 1px solid green;
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+  width: calc(50% - 8px - 0.5rem);
+}
+#listingSearch .roomsDropdownSection .dropdown-content.left {
+  left: 0;
+}
+#listingSearch .roomsDropdownSection .dropdown-content.right {
+  right: 0;
+}
+#listingSearch .roomsDropdownSection .dropdown-content.show {
+  display: flex;
+}
+#listingSearch .roomsDropdownSection .rooms {
+  text-align: left;
+  padding: 0.5rem;
+  border: none;
+  background-color: white;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+#listingSearch .roomsDropdownSection .rooms:hover {
+  background-color: #eee;
+}/*# sourceMappingURL=listingSearch.css.map */
