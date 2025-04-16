@@ -1,6 +1,7 @@
 #listingBody {
   display: flex;
   flex-direction: row;
+  justify-self: center;
   margin-bottom: calc(46px + 1rem);
 }
 
@@ -8,7 +9,7 @@
   display: flex;
   border-radius: 0.5rem;
   border-width: 1px;
-  width: 90%;
+  width: 40vw;
   height: 30vh;
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -27,10 +28,72 @@
   border-bottom-left-radius: inherit;
   width: 50%;
   margin-right: 0.5rem;
-  background-image: linear-gradient(rgb(196, 18, 18), #333, rgb(14, 14, 191));
+  background-color: #333;
+}
+.lhalf1 img {
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .lhalf2 {
   margin: 0.5rem 0.5rem 0.5rem 0rem;
   width: 50%;
+}
+.lhalf2 .listingText {
+  display: flex;
+  flex-direction: row;
+}
+.lhalf2 .listingText p {
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+}
+.lhalf2 .infoText {
+  margin-top: 2rem;
+}
+
+.prev-next-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  transform: translate(-7.5%);
+}
+
+.prevHouseList {
+  text-align: center;
+  padding: 1rem;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: green;
+  width: 5vw;
+  z-index: 2;
+  transition: color 0.3s;
+}
+
+.houseListPageNum {
+  text-decoration: none;
+  text-align: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.nextHouseList {
+  text-align: center;
+  padding: 1rem;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: green;
+  width: 5vw;
+  z-index: 2;
+  transition: color 0.3s;
 }/*# sourceMappingURL=listings.css.map */

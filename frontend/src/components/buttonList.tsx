@@ -10,7 +10,7 @@ export function ButtonList({ rooms, onButtonClick}: ButtonListProps)
     return (
         <div>
             {buttonLabels.map((label, index) => (
-                <button onClick={() => onButtonClick(label)} className={'rooms ' + index}>{label}</button>
+                <button key={index} onClick={() => onButtonClick(label)} className={'rooms ' + index}>{label}</button>
             ))}
         </div>
     );

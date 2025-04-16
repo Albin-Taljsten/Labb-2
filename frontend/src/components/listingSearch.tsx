@@ -5,6 +5,30 @@ import { ButtonList } from './buttonList';
 
 export function ListingSearch()
 {
+    const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        console.log('🔄 Fetching from backend...');
+    
+        fetch('http://localhost:3000')
+        .then((res) => {
+            console.log('✅ Response status:', res.status);
+            return res.json();
+        })
+        .then((data) => {
+            console.log('📦 JSON received:', data);
+            if (data && data.message) {
+            setMessage(data.message);
+            } else {
+            setMessage('⚠️ No message received');
+            }
+        })
+        .catch((err) => {
+            console.error('❌ Fetch error:', err);
+            setMessage('❌ Failed to load message');
+        });
+    }, []);
+
     // Show or Hide dropdown
     const [isDropdownOpenLeft, setDropdownOpenLeft] = useState(false);
     const [isDropdownOpenRight, setDropdownOpenRight] = useState(false);
@@ -103,7 +127,7 @@ export function ListingSearch()
                 <br/>
                 <div className='test'>
                     <h3>Living Area</h3>
-                    <p>SearchForm3</p>
+                    <p>{message}</p>
                     <br/>
                     <h3>Price Range</h3>
                 </div>

@@ -3,7 +3,7 @@ export function WelcomePage()
     return (
         <>
             <div id="welcomePage">
-                <img src="src/images/seattle_skyline.jpg" alt="Seattle Night"/>
+                <img src="/images/seattle_skyline.jpg" alt="Seattle Night"/>
                 <h1>House Index a seattle house listing service</h1>
                 <p>
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo quisquam, voluptatibus culpa dolorem modi 
