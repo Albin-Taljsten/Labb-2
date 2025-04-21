@@ -20,6 +20,17 @@
 #listingSearch h3 {
   text-align: left;
 }
+#listingSearch .rooms {
+  display: flex;
+  background-color: white;
+  border: none;
+  padding: 0.5rem;
+  width: 100%;
+  transition: color 0.3s;
+}
+#listingSearch .rooms:hover {
+  background-color: #EEE;
+}
 #listingSearch .residence {
   text-align: left;
   padding: 1rem;
@@ -87,14 +98,107 @@
 #listingSearch .roomsDropdownSection .dropdown-content.show {
   display: flex;
 }
-#listingSearch .roomsDropdownSection .rooms {
-  text-align: left;
-  padding: 0.5rem;
-  border: none;
-  background-color: white;
+#listingSearch .livingAreaDropdownSection {
+  position: relative;
   width: 100%;
-  transition: background-color 0.3s;
 }
-#listingSearch .roomsDropdownSection .rooms:hover {
-  background-color: #eee;
+#listingSearch .livingAreaDropdownSection .livingAreaButtonSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+#listingSearch .livingAreaDropdownSection .livingAreaDropdown {
+  text-align: left;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: green;
+  width: 100%;
+  z-index: 2;
+  transition: color 0.3s;
+}
+#listingSearch .livingAreaDropdownSection .livingAreaDropdown.left {
+  margin-right: 0.5rem;
+}
+#listingSearch .livingAreaDropdownSection .livingAreaDropdown.right {
+  margin-left: 0.5rem;
+}
+#listingSearch .livingAreaDropdownSection .livingAreaDropdown:hover {
+  background-color: #EEE;
+}
+#listingSearch .livingAreaDropdownSection .dropdown-content {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  border: 1px solid green;
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+  width: calc(50% - 8px - 0.5rem);
+}
+#listingSearch .livingAreaDropdownSection .dropdown-content.left {
+  left: 0;
+}
+#listingSearch .livingAreaDropdownSection .dropdown-content.right {
+  right: 0;
+}
+#listingSearch .livingAreaDropdownSection .dropdown-content.show {
+  display: flex;
+}
+#listingSearch .priceDropdownSection {
+  position: relative;
+  width: 100%;
+}
+#listingSearch .priceDropdownSection .priceButtonSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+#listingSearch .priceDropdownSection .priceDropdown {
+  text-align: left;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: green;
+  width: 100%;
+  z-index: 2;
+  transition: color 0.3s;
+}
+#listingSearch .priceDropdownSection .priceDropdown.left {
+  margin-right: 0.5rem;
+}
+#listingSearch .priceDropdownSection .priceDropdown.right {
+  margin-left: 0.5rem;
+}
+#listingSearch .priceDropdownSection .priceDropdown:hover {
+  background-color: #EEE;
+}
+#listingSearch .priceDropdownSection .dropdown-content {
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  border: 1px solid green;
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+  width: calc(50% - 8px - 0.5rem);
+}
+#listingSearch .priceDropdownSection .dropdown-content.left {
+  left: 0;
+}
+#listingSearch .priceDropdownSection .dropdown-content.right {
+  right: 0;
+}
+#listingSearch .priceDropdownSection .dropdown-content.show {
+  display: flex;
 }/*# sourceMappingURL=listingSearch.css.map */

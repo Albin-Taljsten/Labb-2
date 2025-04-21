@@ -24,6 +24,21 @@ $white-color: white;
         text-align: left;
     }
 
+    .rooms
+    {
+        display: flex;
+        background-color: $white-color;
+        border: none;
+        padding: 0.5rem;
+        width: 100%;
+        transition: color 0.3s;
+
+        &:hover
+        {
+            background-color: #EEE;
+        }
+    }
+
     .residence
     {
         text-align: left;
@@ -86,7 +101,80 @@ $white-color: white;
             }
         }
 
-        .dropdown-content 
+        .dropdown-content
+        {
+            position: absolute;
+            top: 100%;
+            background-color: $white-color;
+            border: 1px solid $green-color;
+            display: none;
+            flex-direction: column;
+            z-index: 10;
+            width: calc(50% - 8px - 0.5rem);
+
+            &.left
+            {
+                left: 0;
+            }
+          
+            &.right
+            {
+                right: 0;
+            }
+
+            &.show
+            {
+                display: flex;
+            }
+        }
+    }
+
+
+
+    .livingAreaDropdownSection
+    {
+        position: relative;
+        width: 100%;
+
+        .livingAreaButtonSection
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .livingAreaDropdown
+        {
+            text-align: left;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            background-color: $white-color;
+            border-radius: 0.5rem;
+            border-width: 1px;
+            border-color: $green-color;
+            width: 100%;
+            z-index: 2;
+            transition: color 0.3s;
+    
+            &.left
+            {
+                margin-right: 0.5rem;
+            }
+            &.right
+            {
+                margin-left: 0.5rem;
+            }
+    
+            &:hover
+            {
+                background-color: #EEE;
+            }
+        }
+
+        .dropdown-content
         {
             position: absolute;
             top: 100%;
@@ -112,17 +200,77 @@ $white-color: white;
                 display: flex;
             }
         }
+    }
 
-        .rooms {
+
+
+    .priceDropdownSection
+    {
+        position: relative;
+        width: 100%;
+
+        .priceButtonSection
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .priceDropdown
+        {
             text-align: left;
-            padding: 0.5rem;
-            border: none;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            text-decoration: none;
             background-color: $white-color;
+            border-radius: 0.5rem;
+            border-width: 1px;
+            border-color: $green-color;
             width: 100%;
-            transition: background-color 0.3s;
-        
-            &:hover {
-              background-color: #eee;
+            z-index: 2;
+            transition: color 0.3s;
+    
+            &.left
+            {
+                margin-right: 0.5rem;
+            }
+            &.right
+            {
+                margin-left: 0.5rem;
+            }
+    
+            &:hover
+            {
+                background-color: #EEE;
+            }
+        }
+
+        .dropdown-content
+        {
+            position: absolute;
+            top: 100%;
+            background-color: $white-color;
+            border: 1px solid $green-color;
+            display: none;
+            flex-direction: column;
+            z-index: 10;
+            width: calc(50% - 8px - 0.5rem);
+
+            &.left 
+            {
+                left: 0;
+            }
+          
+            &.right 
+            {
+                right: 0;
+            }
+
+            &.show 
+            {
+                display: flex;
             }
         }
     }
