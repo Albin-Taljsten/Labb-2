@@ -14,9 +14,18 @@ $white-color: white;
     width: 20vw;
     height: fit-content;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    @media (max-width: 900px) {
-        display: none;
+    @media (max-width: 900px) or (max-height: 900px) {
+        display: flex;
+        flex-direction: column;
+        border-radius: 0.5rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        margin-right: 10vh;
+        margin-left: 10vh;
+        padding: 1rem;
+        width: 50vw;
+        height: fit-content;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     h3
