@@ -54,6 +54,22 @@
   border-color: green;
   transition: color 0.3s;
 }
+#listingSearch .residence.selected {
+  text-align: left;
+  color: white;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  background-color: green;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: green;
+  transition: color 0.3s;
+}
+#listingSearch .residence.selected:hover {
+  background-color: green;
+}
 #listingSearch .residence:hover {
   background-color: #EEE;
 }

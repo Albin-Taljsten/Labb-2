@@ -2,9 +2,12 @@ import '../scss/out/listingSearch.css'
 
 import { useEffect, useRef, useState } from "react";
 import { ButtonList } from './buttonList';
+import { useListingSearch } from '../hooks/listingSearchContext';
 
 export function ListingSearch()
 {
+    const { filterValues, setFilterValues } = useListingSearch();
+
     // Limit option function vars
     const [selectedMinRooms, setSelectedMinRooms] = useState<number | null>(null);
     const [selectedMaxRooms, setSelectedMaxRooms] = useState<number | null>(null);
@@ -56,13 +59,63 @@ export function ListingSearch()
     const rightButtonRefPrice = useRef<HTMLButtonElement>(null);
     const leftDropdownRefPrice = useRef<HTMLDivElement>(null);
     const rightDropdownRefPrice = useRef<HTMLDivElement>(null);
+      
+    const handleToggleResidenceType = (type: keyof typeof filterValues.residenceTypeToggles) => {
+        setFilterValues(prevValues => {
+            const updatedResidenceTypeToggles = { ...prevValues.residenceTypeToggles };
 
-    function parseRoomLabel(label: string): number | null 
+            if (type === 'allTypes') {
+                const allTrue = !updatedResidenceTypeToggles.allTypes;
+                return {
+                    ...prevValues,
+                    residenceTypeToggles: {
+                        allTypes: allTrue,
+                        singleFamily: allTrue,
+                        multiplex: allTrue,
+                        townhouse: allTrue,
+                    },
+                };
+            }
+            else {
+                const current = updatedResidenceTypeToggles[type];
+                updatedResidenceTypeToggles[type] = !current;
+        
+                // If all individual toggles are true, auto-set "allTypes" to true
+                const { singleFamily, multiplex, townhouse } = updatedResidenceTypeToggles;;
+                updatedResidenceTypeToggles.allTypes = singleFamily && multiplex && townhouse;
+                return {
+                    ...prevValues,
+                    residenceTypeToggles: updatedResidenceTypeToggles,
+                };
+            }
+        });
+    };
+
+
+    function parseRoomLabel(label: string): number 
     {
-        if (label === 'Min' || label === 'Max') return null;
+        if (label === 'Min') return 1;
+        if (label === 'Max') return 10;
         const match = label.match(/\d+/); // Checks for digits in a string
-        return match ? parseInt(match[0]) : null;
+        return match ? parseInt(match[0]) : 1;
     }
+
+    function parseLivingSpaceLabel(label: string): number 
+    {
+        if (label === 'Min') return 100;
+        if (label === 'Max') return 1000;
+        const match = label.match(/(\d[\d\s,]*)/); // Match any sequence of digits, spaces, or commas
+        return match ? parseInt(match[0].replace(/\s+/g, '').replace(/,/g, ''), 10) : 100;
+    }
+
+    function parsePriceLabel(label: string): number 
+    {
+        if (label === 'Min') return 100000;
+        if (label === 'Max') return 10000000;
+        const match = label.match(/(\d[\d\s,]*)/); // Match any sequence of digits, spaces, or commas
+        return match ? parseInt(match[0].replace(/\s+/g, '').replace(/,/g, ''), 10) : 100000;
+    }
+
 
     // Functions to handle button text
     function handleButtonTextLeftRooms(label: string)
@@ -72,6 +125,7 @@ export function ListingSearch()
         if (parsed !== null)
         {
             setSelectedMinRooms(parsed);
+            filterValues.minRooms = parsed; // 🌍 Global update
         }
         setDropdownOpenLeftRooms(false);
     }
@@ -83,6 +137,7 @@ export function ListingSearch()
         if (parsed !== null)
         {
             setSelectedMaxRooms(parsed);
+            filterValues.maxRooms = parsed;
         }
         setDropdownOpenRightRooms(false);
     }
@@ -92,10 +147,11 @@ export function ListingSearch()
     function handleButtonTextLeftLivingArea(label: string)
     {
         setButtonTextLeftLivingArea(label);
-        const parsed = parseRoomLabel(label)
+        const parsed = parseLivingSpaceLabel(label)
         if (parsed !== null)
         {
             setSelectedMinLivingArea(parsed);
+            filterValues.minLivingArea = parsed;
         }
         setDropdownOpenLeftLivingArea(false);
     }
@@ -103,10 +159,11 @@ export function ListingSearch()
     function handleButtonTextRightLivingArea(label: string)
     {
         setButtonTextRightLivingArea(label);
-        const parsed = parseRoomLabel(label)
+        const parsed = parseLivingSpaceLabel(label)
         if (parsed !== null)
         {
             setSelectedMaxLivingArea(parsed);
+            filterValues.maxLivingArea = parsed;
         }
         setDropdownOpenRightLivingArea(false);
     }
@@ -116,10 +173,11 @@ export function ListingSearch()
     function handleButtonTextLeftPrice(label: string)
     {
         setButtonTextLeftPrice(label);
-        const parsed = parseRoomLabel(label)
+        const parsed = parsePriceLabel(label)
         if (parsed !== null)
         {
             setSelectedMinPrice(parsed);
+            filterValues.minPrice = parsed;
         }
         setDropdownOpenLeftPrice(false);
     }
@@ -127,10 +185,11 @@ export function ListingSearch()
     function handleButtonTextRightPrice(label: string)
     {
         setButtonTextRightPrice(label);
-        const parsed = parseRoomLabel(label)
+        const parsed = parsePriceLabel(label)
         if (parsed !== null)
         {
             setSelectedMaxPrice(parsed);
+            filterValues.maxPrice = parsed;
         }
         setDropdownOpenRightPrice(false);
     }
@@ -248,10 +307,10 @@ export function ListingSearch()
         <>
             <div id="listingSearch">
                 <h3>Residence Type</h3>
-                <button className='residence'>All types</button>
-                <button className='residence'>Single Family</button>
-                <button className='residence'>Multiplex</button>
-                <button className='residence'>Townhouse</button>
+                <button className={`residence ${filterValues.residenceTypeToggles.allTypes ? 'selected' : ''}`} onClick={() => handleToggleResidenceType('allTypes')}>All types</button>
+                <button className={`residence ${filterValues.residenceTypeToggles.singleFamily ? 'selected' : ''}`} onClick={() => handleToggleResidenceType('singleFamily')}>Single Family</button>
+                <button className={`residence ${filterValues.residenceTypeToggles.multiplex ? 'selected' : ''}`} onClick={() => handleToggleResidenceType('multiplex')}>Multiplex</button>
+                <button className={`residence ${filterValues.residenceTypeToggles.townhouse ? 'selected' : ''}`} onClick={() => handleToggleResidenceType('townhouse')}>Townhouse</button>
                 <br/>
                 <h3>Rooms</h3>
                 <div className='roomsDropdownSection'>
@@ -340,7 +399,7 @@ export function ListingSearch()
                         key={`max-${selectedMinPrice ?? 'null'}-${selectedMaxPrice ?? 'null'}`}
                         mode='max' currentMin={selectedMinPrice}
                         currentMax={selectedMaxPrice}
-                        rooms='Min,<100 000 $,500 000 $,1 000 000 $,2 000 000 $,3 000 000 $,4 000 000 $,5 000 000 $,10 000 000 $+'
+                        rooms='Max,<100 000 $,500 000 $,1 000 000 $,2 000 000 $,3 000 000 $,4 000 000 $,5 000 000 $,10 000 000 $+'
                         onButtonClick={handleButtonTextRightPrice}>
                         </ButtonList>
                     </div>

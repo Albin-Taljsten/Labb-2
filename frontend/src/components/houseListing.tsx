@@ -1,41 +1,92 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useListingSearch } from '../hooks/listingSearchContext'
 
 export function HouseListing()
 {
-    const lim: number = 10;
+    const lim = 10;
 
     // Stores the rows of ids, info and pagination from the db
-    const [salesData, setSalesData] = useState<any[]>([]);
+    const [filteredData, setFilteredData] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);  // Current page
-    const [totalIds, setTotalIds] = useState<number>(0);  // Total number of ids (for pagination)
+
+    const { filterValues, setFilterValues } = useListingSearch();
 
     // Function to fetch ids from the API
-    const fetchSalesData = async (page: number) => {
-        setLoading(true);
+    const fetchFilteredData = async ({
+        page,
+        limit,
+        singleFamily,
+        multiplex,
+        townhouse,
+        minRooms,
+        maxRooms,
+        minLivingArea,
+        maxLivingArea,
+        minPrice,
+        maxPrice,
+      }: {
+        page?: number;
+        limit?: number;
+        singleFamily?: boolean;
+        multiplex?: boolean;
+        townhouse?: boolean;
+        minRooms?: number;
+        maxRooms?: number;
+        minLivingArea?: number;
+        maxLivingArea?: number;
+        minPrice?: number;
+        maxPrice?: number;
+      }) => {
         try {
-            const response = await axios.get('http://localhost:3000/SalesData', {
-                params: {
-                    page: page,
-                    limit: lim, // Shows 50 ids per page (might have to lower this number)
-                },
-            });
-            setSalesData(response.data.SalesData);
-            // setTotalIds(response.total)
-            console.log(response.data.SalesData);  // Log the fetched data to inspect its structure
+          const response = await axios.get('http://localhost:3000/FilterData', {
+            params: {
+              page,
+              limit,
+              singleFamily,
+              multiplex,
+              townhouse,
+              minRooms,
+              maxRooms,
+              minLivingArea,
+              maxLivingArea,
+              minPrice,
+              maxPrice,
+            },
+          });
+          console.log(response.data);  // Check the response in the console
+          return response.data.FilterData;
+        } catch (error) {
+          console.error('Failed to fetch filtered data:', error);
+          return [];
         }
-        catch (error) {
-            console.error('Error fetching data:', error);
-        }
-        finally {
-            setLoading(false);
-        }
-    };
+      };
 
     // Fetch data when the page changes (when next page button is clicked)
+    const handleSearch = () => {
+        setLoading(true);
+        fetchFilteredData({
+            page: page,
+            limit: lim,
+            singleFamily: filterValues.residenceTypeToggles.singleFamily,
+            multiplex: filterValues.residenceTypeToggles.multiplex,
+            townhouse: filterValues.residenceTypeToggles.townhouse,
+            minRooms: filterValues.minRooms,
+            maxRooms: filterValues.maxRooms,
+            minLivingArea: filterValues.minLivingArea,
+            maxLivingArea: filterValues.maxLivingArea,
+            minPrice: filterValues.minPrice,
+            maxPrice: filterValues.maxPrice,
+          })
+          .then((data) => {
+            setFilteredData(data);
+            setLoading(false);
+          });
+    };
+
     useEffect(() => {
-        fetchSalesData(page);
+        handleSearch();
     }, [page]);
 
     const handlePageChange = (newPage: number) => {
@@ -44,25 +95,26 @@ export function HouseListing()
 
     return (
         <>
+            <button onClick={handleSearch} className="searchButton">Search</button>
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                salesData.map((salesData: any) => (
-                    <div id="listingList" key={salesData.SalesID}>
+                filteredData.map((filteredData: any) => (
+                    <div id="listingList" key={filteredData.SalesID}>
                         <div className="lhalf1">
-                            <img src={`/images/256x256/${salesData.Image}.jpg`} alt={salesData.Image} />
+                            <img src={`/images/256x256/${filteredData.Image}.jpg`} alt={filteredData.Image} />
                         </div>
                         <div className="lhalf2">
                             <h2>Seattle</h2>
-                            <p>Zip Code: {salesData.zip_code}</p>
+                            <p>Zip Code: {filteredData.zip_code}</p>
                             <div className="listingText">
-                                <p>{salesData.SalePrice}$</p>
-                                <p>{salesData.SqMTotLiving} m&#178;</p>
-                                <p>Rooms: {salesData.Bedrooms}</p>
+                                <p>{filteredData.SalePrice}$</p>
+                                <p>{filteredData.SqMTotLiving} m&#178;</p>
+                                <p>Rooms: {filteredData.Bedrooms}</p>
                             </div>
                             <p className="infoText">
-                                Welcome to this house in Seattle built in {salesData.YrBuilt}.
-                                This house has a combined living area of {salesData.SqMLot} m&#178; with a nice view of the Seattle area.
+                                Welcome to this {filteredData.PropertyType} house in Seattle built in {filteredData.YrBuilt}.
+                                This house has a combined living area of {filteredData.SqMLot} m&#178; with a nice view of the Seattle area.
                             </p>
                         </div>
                     </div>
@@ -73,7 +125,7 @@ export function HouseListing()
             <div className="prev-next-container">
                 <button className="prevHouseList" type="button" onClick={(e) => { e.preventDefault(); handlePageChange(page - 1); }} disabled={page === 1}>Prev</button>
                 <p className="houseListPageNum">Page {page}</p>
-                <button className="nextHouseList" type="button" onClick={(e) => { e.preventDefault(); handlePageChange(page + 1); }} disabled={salesData.length < lim}>Next</button>
+                <button className="nextHouseList" type="button" onClick={(e) => { e.preventDefault(); handlePageChange(page + 1); }} disabled={filteredData.length < lim}>Next</button>
             </div>
         </>
     );
