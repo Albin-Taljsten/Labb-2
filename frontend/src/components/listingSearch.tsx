@@ -96,7 +96,7 @@ export function ListingSearch()
     {
         if (label === 'Min') return 1;
         if (label === 'Max') return 10;
-        const match = label.match(/\d+/); // Checks for digits in a string
+        const match = label.match(/\d+/); // \d means “a digit” (0–9) and + means “one or more of the preceding item” (in this case, digits)
         return match ? parseInt(match[0]) : 1;
     }
 
@@ -104,7 +104,11 @@ export function ListingSearch()
     {
         if (label === 'Min') return 100;
         if (label === 'Max') return 1000;
-        const match = label.match(/(\d[\d\s,]*)/); // Match any sequence of digits, spaces, or commas
+
+        // (...): Parentheses define a capturing group, which is what .match() will return
+        // \d: Matches a single digit (0–9)
+        // [...] defines a character class, \d: digit (0–9), \s: whitespace (like spaces or tabs), ,: a literal comma and *: zero or more of these characters
+        const match = label.match(/(\d[\d\s,]*)/);
         return match ? parseInt(match[0].replace(/\s+/g, '').replace(/,/g, ''), 10) : 100;
     }
 
