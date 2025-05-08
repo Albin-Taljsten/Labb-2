@@ -10,6 +10,7 @@ export function NavBar({ activePage }: { activePage: string })
                     <div id="navBar">
                         <Link className="navBarLeft link" id="active" to="/">Home</Link>
                         <Link className="link" to="/listings">Listings</Link>
+                        <Link className="link" to="/market">Analyse Market</Link>
                     </div>
                 </>
             );
@@ -19,8 +20,21 @@ export function NavBar({ activePage }: { activePage: string })
                     <div id="navBar">
                         <Link className="navBarLeft link" to="/">Home</Link>
                         <Link className="link" id="active" to="/listings">Listings</Link>
+                        <Link className="link" to="/market">Analyse Market</Link>
                     </div>
                 </>
             );
+        case "market":
+            return(
+                <>
+                    <div id="navBar">
+                        <Link className="navBarLeft link" to="/">Home</Link>
+                        <Link className="link" to="/listings">Listings</Link>
+                        <Link className="link" id="active" to="/market">Analyse Market</Link>
+                    </div>
+
+                </>
+
+            )
     }
 }

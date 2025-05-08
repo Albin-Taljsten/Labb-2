@@ -1,0 +1,28 @@
+.testChart 
+{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 2rem;
+}
+
+.randomButton
+{
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    margin-top: 1rem;
+    background-color: darkgray;
+    border-style: none;
+    padding: 0.5rem;
+
+    &:hover
+    {
+        background-color: rgb(201, 201, 201);
+    }
+
+    &:active
+    {
+        border-style: solid;
+    }
+}
