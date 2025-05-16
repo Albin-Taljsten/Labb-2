@@ -37,6 +37,7 @@ import {
     SubTitle,
 } from 'chart.js'
 import { useEffect, useRef, useState } from "react"
+import axios from "axios"
 
 Chart.register(
     // Controllers
@@ -76,8 +77,29 @@ export function Market() {
     const chartRef = useRef<HTMLCanvasElement | null>(null);
     const chartInstanceRef = useRef<Chart | null>(null);
 
+    const [fetchedData, setFetchedData] = useState<any[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+
     const [xValues, setXValues] = useState([50,60,70,80,90,100,110,120,130,140,150]);
     const [yValues, setYValues] = useState([7,8,8,9,9,9,10,11,14,14,15]);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/SalesData');
+            return response.data.SalesData;
+        } catch (error) {
+            console.error('Failed to fetch data: ', error)
+            return [];
+        }
+    }
+
+    useEffect(() => {
+        setLoading(true);
+        fetchData().then((data) => {
+            setFetchedData(data);
+            setLoading(false);
+        });
+    });
 
     useEffect(() => {
         
@@ -136,21 +158,29 @@ export function Market() {
         setXValues(xValues.map(x => x + 10));
         setYValues(yValues.map(() => Math.floor(Math.random() * 15) + 5));
     }
+    
 
     return (
         <>
             <NavBar activePage="market"></NavBar>
-                <div className="testChart">
-                    <canvas 
-                        ref= { chartRef } 
-                        style= {{ 
-                            maxHeight: '250px',
-                            maxWidth: '500px',
-                        }}
-                    >
-                    </canvas>
-                </div>
-                <button className="randomButton" onClick={randomizeData}>Randomize</button>
+
+            <div className="chartButtons">
+                <button className="chartButton">Line Chart</button>
+                <button className="chartButton">Bar Chart</button>
+                <button className="chartButton">Pie Chart</button>
+            </div>
+
+            <div className="testChart">
+                <canvas 
+                    ref= { chartRef } 
+                    style= {{ 
+                        maxHeight: '250px',
+                        maxWidth: '500px',
+                    }}
+                >
+                </canvas>
+            </div>
+            <button className="randomButton" onClick={randomizeData}>Randomize</button>
             <Footer></Footer>
         </>
     );

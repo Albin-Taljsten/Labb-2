@@ -22,13 +22,11 @@ const db = new sqlite3.Database(path.resolve(__dirname, './database/HouseSalesSe
 // Route to get SalesID:s with pagination
 app.get('/SalesData', (req, res) => {
 	// Set default page and limit
-	const page = parseInt(req.query.page as string) || 1;
-	const limit = parseInt(req.query.limit as string) || 10;  // Get 10 records at a time
-	const offset = (page - 1) * limit;
+	const limit = parseInt(req.query.limit as string) || 10000;  // Get 10 records at a time
 
-	const query = 'SELECT * FROM HouseSalesSeattle LIMIT ? OFFSET ?';
+	const query = 'SELECT * FROM HouseSalesSeattle LIMIT ?';
 
-	db.all(query, [limit, offset], (err, rows) => {
+	db.all(query, [limit], (err, rows) => {
 		if (err) {
 			res.status(500).send('Error reading data from database');
 			console.error(err);

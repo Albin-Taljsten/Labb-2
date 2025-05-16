@@ -1,3 +1,32 @@
+.chartButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  align-self: center;
+  width: 50%;
+}
+.chartButtons .chartButton {
+  margin-top: 2rem;
+  background-color: darkgray;
+  border-style: none;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background-color: green;
+  color: white;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 0.25rem;
+}
+.chartButtons .chartButton:hover {
+  background-color: rgb(0, 80, 0);
+}
+.chartButtons .chartButton:active {
+  transform: translateY(4px);
+}
+
 .testChart {
   display: flex;
   justify-content: center;
