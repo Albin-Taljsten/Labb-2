@@ -1,13 +1,10 @@
-.chartButtons {
+.chartButtonsContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  justify-self: center;
-  align-self: center;
-  width: 50%;
 }
-.chartButtons .chartButton {
+.chartButtonsContainer .chartButtons .chartButton {
   margin-top: 2rem;
   background-color: darkgray;
   border-style: none;
@@ -19,12 +16,129 @@
   transition: background-color 0.3s;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 0.25rem;
+  font-size: medium;
 }
-.chartButtons .chartButton:hover {
+.chartButtonsContainer .chartButtons .chartButton:hover {
+  cursor: pointer;
   background-color: rgb(0, 80, 0);
 }
-.chartButtons .chartButton:active {
+.chartButtonsContainer .chartButtons .chartButton:active {
   transform: translateY(4px);
+}
+.chartButtonsContainer .chartButtons .chartDropdown {
+  margin-top: 2rem;
+  background-color: darkgray;
+  border-style: none;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background-color: green;
+  color: white;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 0.25rem;
+  font-size: medium;
+}
+.chartButtonsContainer .chartButtons .chartDropdown:hover {
+  cursor: pointer;
+  background-color: rgb(0, 80, 0);
+}
+.chartButtonsContainer .chartButtons .chartDropdown:focus {
+  outline: none;
+}
+
+.biddingForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Firefox */
+}
+.biddingForm h2 {
+  margin-top: 3rem;
+  justify-self: center;
+}
+.biddingForm p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.biddingForm input {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  border-style: solid;
+  border-color: green;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.biddingForm input:focus {
+  border-color: rgb(0, 80, 0);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+.biddingForm input[type=number]::-webkit-outer-spin-button,
+.biddingForm input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.biddingForm input[type=number] {
+  -moz-appearance: textfield;
+}
+.biddingForm button {
+  margin-top: 1.5rem;
+  background-color: darkgray;
+  border-style: none;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  width: 8rem;
+  background-color: green;
+  color: white;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 0.25rem;
+  font-size: large;
+}
+.biddingForm button:hover {
+  cursor: pointer;
+  background-color: rgb(0, 80, 0);
+}
+.biddingForm button:active {
+  transform: translateY(4px);
+}
+.biddingForm .bidCard {
+  justify-self: center;
+  text-align: center;
+  margin-top: 1rem;
+  width: 40vh;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 0.25rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-style: solid;
+  border-color: green;
+}
+.biddingForm .bidCard h3 {
+  margin-top: 0.25rem;
+}
+.biddingForm .bidCard p {
+  margin-top: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.bidCardContainer {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-bottom: calc(46px + 3rem);
 }
 
 .testChart {

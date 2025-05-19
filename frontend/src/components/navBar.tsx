@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export function NavBar({ activePage }: { activePage: string })
+export function NavBar({ activePage, loggedIn, toggleLogin }: { activePage: string; loggedIn?: boolean; toggleLogin?: () => void; })
 {
     switch (activePage)
     {
@@ -31,10 +31,9 @@ export function NavBar({ activePage }: { activePage: string })
                         <Link className="navBarLeft link" to="/">Home</Link>
                         <Link className="link" to="/listings">Listings</Link>
                         <Link className="link" id="active" to="/market">Analyse Market</Link>
+                        <Link className="navBarRight link" onClick={toggleLogin} to="/market">{loggedIn ? "Login" : "Logout"}</Link>
                     </div>
-
                 </>
-
             )
     }
 }

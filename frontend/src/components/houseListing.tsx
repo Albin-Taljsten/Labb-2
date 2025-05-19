@@ -107,6 +107,7 @@ export function HouseListing()
                         <div className="lhalf2">
                             <h2>Seattle</h2>
                             <p>Zip Code: {filteredData.zip_code}</p>
+                            <p>Property id: {filteredData.PropertyID}</p>
                             <div className="listingText">
                                 <p>{filteredData.SalePrice}$</p>
                                 <p>{filteredData.SqMTotLiving} m&#178;</p>

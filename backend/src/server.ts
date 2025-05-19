@@ -1,9 +1,16 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import sqlite3 from 'sqlite3';
+import WebSocket, { WebSocketServer } from 'ws';
+import http from 'http';
+
 
 const app = express();
 const port = 3000;
+
+const server = http.createServer(app);
+
+const wss = new WebSocketServer({ server });
 
 app.use(cors({
 	origin: 'http://localhost:5173'
@@ -24,9 +31,9 @@ app.get('/SalesData', (req, res) => {
 	// Set default page and limit
 	const limit = parseInt(req.query.limit as string) || 10000;  // Get 10 records at a time
 
-	const query = 'SELECT * FROM HouseSalesSeattle LIMIT ?';
+	const query = 'SELECT * FROM HouseSalesSeattle';
 
-	db.all(query, [limit], (err, rows) => {
+	db.all(query, [], (err, rows) => {
 		if (err) {
 			res.status(500).send('Error reading data from database');
 			console.error(err);
@@ -145,7 +152,64 @@ app.get('/FilterData', (req, res) => {
 	});
 });
 
+interface Bid {
+  name: string;
+  email: string;
+  propertyID: number;
+  amount: number;
+}
 
-app.listen(port, () => {
-	console.log(`Server is running at http://localhost:${port}`);
+let currentBid = 0;
+
+let bidHistory: Bid[] = [];
+
+wss.on('connection', (ws) => {
+	console.log('Client connected via WebSocket');
+	
+	ws.send(JSON.stringify({ type: 'history', bids: bidHistory }));
+
+	ws.on('message', (message: WebSocket.RawData) => {
+		console.log('Received: ', message.toString());
+		
+		const messageStr = typeof message === 'string' ? message : message.toString();
+
+		try {
+			const bidData = JSON.parse(messageStr);
+			const newBidAmount = parseInt(bidData.amount);
+			
+
+			const currentMax = bidHistory
+				.filter(b => b.propertyID === bidData.propertyID)
+				.reduce((max, b) => Math.max(max, b.amount), 0);
+
+			if(newBidAmount > currentMax) {
+				bidHistory.push(bidData);
+			}
+			
+			
+
+			const broadcastData = JSON.stringify({ type: 'history', bids: bidHistory });
+
+			wss.clients.forEach(client => {
+				if (client.readyState === WebSocket.OPEN)
+				{
+					client.send(broadcastData);
+				}
+			});
+
+		} catch (e) {
+			console.error('Failed to parse JSON message:', e);
+			// Optionally send error message back to sender
+			ws.send(JSON.stringify({ type: 'error', message: 'Invalid JSON' }));
+		}
+	});
+
+	ws.on('close', () => {
+		console.log('Client disconnected');
+	})
+});
+
+
+server.listen(port, () => {
+	console.log(`HTTP + WebSocket server is running at http://localhost:${port}`);
 });
