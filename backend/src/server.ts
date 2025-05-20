@@ -157,9 +157,10 @@ interface Bid {
   email: string;
   propertyID: number;
   amount: number;
+  nameID: number;
 }
 
-let currentBid = 0;
+let currentID = 0;
 
 let bidHistory: Bid[] = [];
 
@@ -181,6 +182,15 @@ wss.on('connection', (ws) => {
 			const currentMax = bidHistory
 				.filter(b => b.propertyID === bidData.propertyID)
 				.reduce((max, b) => Math.max(max, b.amount), 0);
+
+			const newID = bidHistory.find(b => b.name === bidData.name);
+
+			if (newID) {
+				bidData.nameID = newID.nameID;
+			} else {
+				currentID++;
+				bidData.nameID = currentID;
+			}
 
 			if(newBidAmount > currentMax) {
 				bidHistory.push(bidData);

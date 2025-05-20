@@ -101,11 +101,13 @@ export function Market() {
     const [loading, setLoading] = useState<boolean>(false);
 
     const [chartValue, setChartValue] = useState<string>("line");
+    const [chartKey, setChartKey] = useState(false);
 
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const propertyIDRef = useRef<HTMLInputElement>(null);
     const amountRef = useRef<HTMLInputElement>(null);
+    const nameIDRef = useRef<number>(0);
 
     const [isFormValid, setIsFormValid] = useState(false)
 
@@ -213,6 +215,7 @@ export function Market() {
             email: emailRef.current!.value,
             propertyID: propertyIDRef.current!.value,
             amount: amountRef.current!.value,
+            nameID: nameIDRef.current,
         };
 
         if (ws.current && ws.current.readyState === WebSocket.OPEN)
@@ -231,7 +234,7 @@ export function Market() {
         return () => {
             chartInstanceRef.current?.destroy();
           };
-    }, [chartValue, fetchedData]);
+    }, [chartValue, fetchedData, chartKey]);
 
     function barChart()
     {   
@@ -288,7 +291,8 @@ export function Market() {
     }
 
     function pieChart()
-    {
+    {   
+        
         const ctx = chartRef.current?.getContext('2d');
         if(!ctx) return;
 
@@ -427,7 +431,7 @@ export function Market() {
 
             <div className="chartButtonsContainer">
                 <div className="chartButtons">
-                    <select className="chartDropdown" value={chartValue} onChange={ (e) => {setChartValue(e.target.value); setActiveView('chart');}}>
+                    <select className="chartDropdown" value={chartValue} onMouseDown={() => {setActiveView('chart'); setChartKey(prev => !prev);}} onChange={ (e) => {setChartValue(e.target.value); setActiveView('chart');}}>
                         <option value="" disabled>Select Chart</option>
                         <option value="line">Average Sale Price per year Built</option>
                         <option value="bar">Average cost per type</option>
@@ -451,7 +455,7 @@ export function Market() {
                     </>
                 ) : (
                     <div className="biddingForm">
-                        <h1>Bid on a property</h1>
+                        <h1>Place a bid on a property</h1>
 
                         <div className="name">
                             <p>Full name:</p>
@@ -503,7 +507,7 @@ export function Market() {
                                 <ul className="cardList">
                                     {bidHistory.map((bid, i) => (
                                         <div key={i} className="bidCard">
-                                            <h3>Anonymous {i+1}</h3>
+                                            <h3>Anonymous {bid.nameID}</h3>
                                             <p>Bid Amount: {bid.amount}$</p>
                                             <p>PropertyID: {bid.propertyID}</p>
                                         </div>
